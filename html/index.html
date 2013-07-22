@@ -26,6 +26,10 @@
     <script type="text/javascript" src="js/logic.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="resources/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="resources/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
 </head>
 <body>
 
@@ -237,44 +241,26 @@
                         <div class="col"><a class="nr" href="#"><span>010</span></a></div>
                         <div class="col"><a class="nr" href="#"><span>011</span></a></div>
                         <div class="col"><a class="nr" href="#"><span>012</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>013</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>014</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>015</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>016</span></a></div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><a class="nr" href="#"><span>017</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>018</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>019</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>020</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>021</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>022</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>023</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>024</span></a></div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><a class="nr" href="#"><span>025</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>026</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>027</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>028</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>029</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>030</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>031</span></a></div>
-                        <div class="col"><a class="nr" href="#"><span>032</span></a></div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
     <footer>
-        <nav>
-            <a href="#" class="btn">nieuw</a>
-            <a href="#" class="btn">melding</a>
-        </nav>
-        <nav class="tabs">
-            <a href="#" class="btn">balie</a>
-            <a href="#" class="btn">depot</a>
-        </nav>
+        <div class="content">
+            <nav>
+                <ul>
+                    <li><a href="#melding" class="btn fancybox">nieuw</a></li>
+                    <li><a href="#" class="btn">melding</a></li>
+                </ul>
+            </nav>
+            <nav class="tabs">
+                <ul>
+                    <li><a href="#" class="btn">balie</a></li>
+                    <li><a href="#" class="btn">depot</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
 </section>
 
@@ -505,6 +491,25 @@
 
     </footer>
 </section>
+
+<!-- popups -->
+<div id="melding" class="popup">
+    <div class="content">
+        <div class="formfield row">
+            <div class="col">
+                <div class="nr"><span></span></div>
+            </div>
+            <div class="col">
+                <label for="melding_tafelnummer">tafelnummer</label>
+                <input type="text" id="melding_tafelnummer" name="nr" maxlength="3">
+            </div>
+        </div>
+        <div class="formfield row">
+            <label for="melding_opmerking">opmerking</label>
+            <textarea id="melding_opmerking"></textarea>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

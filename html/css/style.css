@@ -22,7 +22,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 /*unreset */
 strong 			{ font-weight:bold; }
 em 				{ font-style:italic;}
-* 				{ -webkit-user-select:none; }
 
 @font-face {
     font-family: 'FedraSansAltStd-Medium';
@@ -40,13 +39,16 @@ _____________________________________________________*/
 
 html,
 body        { width:100%; height:100%;}
-body        { font-size:16px;  font-family: 'FedraSansAltStd-Medium', arial, sans-serif; }
+body,
+input,
+textarea    { font-size:16px; font-family: 'FedraSansAltStd-Medium', arial, sans-serif; }
 body.comic  { font-family:"Comic Sans MS"; }
 h1          { color:#FFF; font-size:3em; }
 a           { text-decoration:none; outline:none; }
 
 /* buttons */
-a.btn       { display:block; height:40px; line-height:40px; width:100px; color:#FFF; background:#CCC;}
+a.btn       { display:block; height:40px; line-height:40px; text-align:center; width:150px; color:#FFF; background:#00A7E3; }
+a.btn:hover { text-decoration:underline; }
 
 /* pasnummers */
 .nr         { display:block; color:#FFF; background:#00A7E3; position:relative; }
@@ -54,7 +56,6 @@ a.btn       { display:block; height:40px; line-height:40px; width:100px; color:#
 .columns20 .nr span { font-size:2em; margin-top:-16px;}
 
 /* pages */
-
 section.page            { position:absolute; width:100%; height:100%; top:0; left:0; opacity:0; visibility:hidden;
                             -webkit-transition: opacity 1s;
                             -moz-transition: opacity 1s;
@@ -67,19 +68,24 @@ section.page > footer       { width:100%; background:#FF6200; height:8%; positio
 section.page > header h1    { width:100%; position:absolute; top:50%; margin-top:-24px; text-align:center; }
 section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 auto; }
 
-/* grid */
-.row { clear:both; overflow:hidden; width:100%; height:25%; }
-.row > .col { float:left; display:block; height:100%; width:11.1%; margin-left:1.6%; position:relative; }
-.row > .col:first-child { margin-left:0 }
-.row > .col .nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
-table.row { height:100%; border-collapse:collapse; }
-table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; }
+section.page > footer .content { width:96%; height:100%; position:relative; margin:0 auto;}
+section.page > footer nav { height:40px; position:absolute; top:50%; margin-top:-20px; }
+section.page > footer nav.tabs { right:0;}
+section.page > footer nav ul li { float:left; margin-left:20px; }
 
-.columns20 .row { height:10%;}
-.columns20 .row > .col { width:4.335%; margin-left:0.7%; }
-.columns20 .row > .col:first-child { margin-left:0;}
-.columns20 .row > .col .nr { }
-.columns20 .row > .col .nr:hover { background:#FF6200; }
+/* grid */
+section.page .row { clear:both; overflow:hidden; width:100%; height:25%; }
+section.page .row > .col { float:left; display:block; height:100%; width:11.1%; margin-left:1.6%; position:relative; }
+section.page .row > .col:first-child { margin-left:0 }
+section.page .row > .col .nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
+section.page table.row { height:100%; border-collapse:collapse; }
+section.page table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; }
+
+section.page .columns20 .row { height:10%;}
+section.page .columns20 .row > .col { width:4.335%; margin-left:0.7%; }
+section.page .columns20 .row > .col:first-child { margin-left:0;}
+section.page .columns20 .row > .col .nr { }
+section.page .columns20 .row > .col .nr:hover { background:#FF6200; }
 
 /* sliders */
 .flexslider { height:100%; position:relative; }
@@ -106,6 +112,18 @@ table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; verti
                             border-radius:50%; -webkit-border-radius:50%;}
 .flex-control-nav li a.flex-active { background:#00A7E3; color:#00A7E3; }
 
-
-
+/* popus */
+.popup                  { width:800px; height:600px; display:none; position:relative; }
+.popup .content         { position:absolute; top:35px; right:35px; bottom:35px; left:35px; }
+.popup .nr              { width:142px; height:142px; }
+.popup .col             { float:left; margin-left:35px; }
+.popup .col:first-child { margin-left:0; }
+.popup .row             { overflow:hidden; margin-bottom:35px; }
+.popup label            { display:block; font-size:2em; padding-bottom:19px;}
+.popup input,
+.popup textarea         { border:3px solid black; outline:none; box-sizing:border-box; -moz-box-sizing:border-box; }
+.popup input:focus,
+.popup textarea:focus   { outline:none; border:3px solid black; }
+.popup input            { width:165px; height:91px; text-align:center; font-size:3em; }
+.popup textarea         { width:100%; height:180px; padding:10px; font-size:2em;}
 

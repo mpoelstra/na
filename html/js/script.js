@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    $('.fancybox').fancybox();
 
     NA.controller.initialize(function() {
         if(window.location.hash) {
