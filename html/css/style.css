@@ -1,0 +1,106 @@
+/*
+_____________________________________________________
+
+INHOUD
+_____________________________________________________
+
+1.  RESET
+2.  GLOBALS
+
+fontsizes
+
+1em = 16px
+2em = 32px
+3em = 48px
+4em = 64px
+_____________________________________________________
+
+1. RESET
+_____________________________________________________*/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+/*unreset */
+strong 			{ font-weight:bold; }
+em 				{ font-style:italic;}
+* 				{ -webkit-user-select:none; }
+
+@font-face {
+    font-family: 'FedraSansAltStd-Medium';
+    src: url('../fonts/FedraSansAltStd-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/*_____________________________________________________
+
+2. GLOBALS
+_____________________________________________________*/
+
+html,
+body        { width:100%; height:100%;}
+body        { font-size:16px;  font-family: 'FedraSansAltStd-Medium', arial, sans-serif; }
+body.comic  { font-family:"Comic Sans MS"; }
+h1          { color:#FFF; font-size:3em; }
+a           { text-decoration:none; outline:none; }
+
+/* pasnummers */
+.nr         { display:block; color:#FFF; background:#00A7E3; position:relative; }
+.nr span    { display:block; font-size:4em; width:100%; position:absolute; top:50%; margin-top:-32px; text-align:center; }
+.columns20 .nr span { font-size:2em; margin-top:-16px;}
+
+section.page            { position:absolute; width:100%; height:100%; top:0; left:0; opacity:0; visibility:hidden;
+                            -webkit-transition: opacity 1s;
+                            -moz-transition: opacity 1s;
+                            -ms-transition: opacity 1s;
+                            -o-transition: opacity 1s;
+                            transition: opacity 1s; }
+section.page.visible        { opacity:1; visibility:visible; }
+section.page > header       { width:100%; background:#FF6200; height:10%; position:relative; }
+section.page > footer       { width:100%; background:#FF6200; height:8%; position:absolute; bottom:0; }
+section.page > header h1    { width:100%; position:absolute; top:50%; margin-top:-24px; text-align:center; }
+section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 auto; }
+
+/* grid */
+.row { clear:both; overflow:hidden; width:100%; height:25%; }
+.row > .col { float:left; display:block; height:100%; width:11.1%; margin-left:1.6%; position:relative; }
+.row > .col:first-child { margin-left:0 }
+.row > .col .nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
+table.row { height:100%; border-collapse:collapse; }
+table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; }
+
+.columns20 .row { height:10%;}
+.columns20 .row > .col { width:4.335%; margin-left:0.7%; }
+.columns20 .row > .col:first-child { margin-left:0;}
+.columns20 .row > .col .nr { }
+.columns20 .row > .col .nr:hover { background:#FF6200; }
+
+/* sliders */
+.flexslider { height:100%; position:relative; }
+.flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .flex-viewport { height:90%;} /* flexslide type slide */
+.flexslider .flex-control-nav {height:10%; width:100%; text-align:center;}
+.flexslider .flex-viewport ul,
+.flexslider .flex-viewport ul li { height:100%; }
+
+.flexslider > ul.slides { height:90%;} /* flexslide type fade */
+.flexslider > ul.slides li  { height:100%; }
+
+.flexslider > .progress         { width:25%; height:10%; position:absolute; bottom:0; right:0; }
+.flexslider .progressbar        { width:100%; height:25px; border:5px solid #00A7E3; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
+.flexslider .progressbar .meter { height:100%; background:#00A7E3; }
+
+.flex-control-nav li    { display:inline-block; margin:0 10px; width:40px; height:100%; position:relative; }
+.flex-control-nav li a  { display:block; cursor:pointer; position:absolute; top:50%; margin-top:-20px; color:#FFF; text-align:center;
+                            width:40px; height:40px; line-height:40px;
+                            box-sizing:border-box;
+                            -moz-box-sizing:border-box;
+                            border:5px solid #00A7E3;
+                            background:#FFF;
+                            border-radius:50%; -webkit-border-radius:50%;}
+.flex-control-nav li a.flex-active { background:#00A7E3; color:#00A7E3; }
+
+
+
+
