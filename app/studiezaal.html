@@ -1,0 +1,8 @@
+<table border="1" ng-repeat="page in passen.pages">
+	<tr ng-repeat="row in page.rows">
+		<td ng-repeat="item in row.items">
+			{{item.pasnummer |formatpasnummer}}
+		</td>
+	</tr>
+
+</table>
