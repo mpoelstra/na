@@ -1,0 +1,16 @@
+<table border="1" >
+	<tr ng-repeat="row in passen.rows">
+		<td ng-repeat="item in row">
+			<div ng-click="selectPas($event, item)" depotpas>
+				<div ng-show="item.ingeschakeld == 1" style="color:red">
+									{{item.pasnummer |formatpasnummer}}
+				</div>
+				<div ng-show="item.ingeschakeld == 0">
+									{{item.pasnummer |formatpasnummer}}
+				</div>
+			</div>
+		</td>
+	</tr>
+	<div ng-click="togglePasState()">{{editstate}}</div>
+
+</table>
