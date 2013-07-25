@@ -55,6 +55,38 @@ $(document).ready(function() {
             changeNav.hide();
         });
 
+        //show change bar
+        $('#depot').find('a.nr').on('click', function(e) {
+            e.preventDefault();
+            $(this).closest('.page').find('a.nr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            var nr = $(this).find('span').html();
+            var changeNav = $(this).closest('.page').find('nav.change');
+            changeNav.find('.nummer').html(nr);
+            if ($(this).hasClass('enabled')) {
+                changeNav.find('.text').text('uitzetten');
+            } else {
+                changeNav.find('.text').text('aanzetten');
+            }
+            changeNav.show();
+        });
+
+        $('#depot .change').find('a.btn').on('click', function(e) {
+            e.preventDefault();
+            alert('doe wat');
+            var selectedPas = $(this).closest('.page').find('a.nr.selected');
+            var changeNav = $(this).closest('.page').find('nav.change');
+            if (selectedPas.hasClass('enabled')) {
+                selectedPas.removeClass('enabled');
+                changeNav.find('.text').text('aanzetten');
+            } else {
+                selectedPas.addClass('enabled');
+                changeNav.find('.text').text('uitzetten');
+            }
+        });
+
+
+
         //all sliders
         $('.flexslider').flexslider({
             animation: "slide",
