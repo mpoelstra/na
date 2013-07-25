@@ -45,14 +45,20 @@ textarea    { font-size:16px; font-family: 'FedraSansAltStd-Medium', arial, sans
 body.comic  { font-family:"Comic Sans MS"; }
 h1          { color:#FFF; font-size:3em; }
 a           { text-decoration:none; outline:none; }
+strong         { color:#FFF; font-weight:normal; }
 
 /* buttons */
-a.btn       { display:block; height:40px; line-height:40px; text-align:center; width:150px; color:#FFF; background:#00A7E3; }
-a.btn:hover { text-decoration:underline; }
+a.btn       { display:inline-block; height:40px; line-height:40px; text-align:center; width:150px; color:#FFF; background:#00A7E3; }
+a.btn:hover { -webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5); }
+a.btn.large { width:300px; height:80px; line-height:80px; font-size:2em; }
 
 /* pasnummers */
-.nr         { display:block; color:#FFF; background:#00A7E3; position:relative; }
-.nr span    { display:block; font-size:4em; width:100%; position:absolute; top:50%; margin-top:-32px; text-align:center; }
+.nr                 { display:block; color:#FFF; background:#00A7E3; position:relative; }
+.nr:hover           { background:#FF6200; }
+.nr.selected        { background:#FF6200; border:5px solid black; box-sizing:border-box; -moz-box-sizing:border-box; }
+.nr span            { display:block; font-size:4em; width:100%; position:absolute; top:50%; margin-top:-32px; text-align:center; }
 .columns20 .nr span { font-size:2em; margin-top:-16px;}
 
 /* pages */
@@ -70,22 +76,39 @@ section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 a
 
 section.page > footer .content { width:96%; height:100%; position:relative; margin:0 auto;}
 section.page > footer nav { height:40px; position:absolute; top:50%; margin-top:-20px; }
+section.page > footer nav.change { display:none; }
 section.page > footer nav.tabs { right:0;}
-section.page > footer nav ul li { float:left; margin-left:20px; }
+section.page > footer nav ul li { float:left; margin-right:20px; }
+section.page > footer nav.tabs ul li { margin-right:0; margin-left:20px; }
+section.page > footer nav ul li span { display:inline-block; font-size:3em; height:40px; line-height:40px; }
 
 /* grid */
 section.page .row { clear:both; overflow:hidden; width:100%; height:25%; }
 section.page .row > .col { float:left; display:block; height:100%; width:11.1%; margin-left:1.6%; position:relative; }
 section.page .row > .col:first-child { margin-left:0 }
-section.page .row > .col .nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
+section.page .row > .col a.nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
 section.page table.row { height:100%; border-collapse:collapse; }
 section.page table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; }
 
 section.page .columns20 .row { height:10%;}
 section.page .columns20 .row > .col { width:4.335%; margin-left:0.7%; }
 section.page .columns20 .row > .col:first-child { margin-left:0;}
-section.page .columns20 .row > .col .nr { }
-section.page .columns20 .row > .col .nr:hover { background:#FF6200; }
+
+section.page .columns2 .row { height:100%;}
+section.page .columns2 .row .col { width:49%; margin-left:2%; }
+section.page .columns2 .row .col:first-child { margin-left:0;}
+
+/* page specific */
+#attendering .todo              { height:20%; width:100%; position:relative; }
+#attendering .todo .inner       { position:absolute; top:4%; right:0; bottom:4%; left:0; background:#00A7E3; overflow:hidden; }
+#attendering .todo .inner div.nr { position:absolute; width:20%; height:100%; background:#FF6200; border:10px solid #00A7E3; box-sizing:border-box; -moz-box-sizing:border-box; }
+#attendering .todo .inner div.nr span { }
+#attendering .todo .inner div.message { width:80%; height:100%; position:absolute; left:20%;}
+#attendering .todo .inner div.message table { height:100%; width:100%;}
+#attendering .todo .inner div.message table tr td { width:94%; padding:0 3%; height:100%; text-align:left; vertical-align:middle; font-size:2em; line-height:36px; }
+#attendering .todo .inner span.issue { display:block; font-size:2em; background:white; color:#000; width:50px; height:50px; line-height:50px; text-align:center; position:absolute; top:0; right:0;}
+
+
 
 /* sliders */
 .flexslider { height:100%; position:relative; }
@@ -126,4 +149,6 @@ section.page .columns20 .row > .col .nr:hover { background:#FF6200; }
 .popup textarea:focus   { outline:none; border:3px solid black; }
 .popup input            { width:165px; height:91px; text-align:center; font-size:3em; }
 .popup textarea         { width:100%; height:180px; padding:10px; font-size:2em;}
+.popup textarea.large   { height:360px;}
+.popup footer           { position:absolute; bottom:0; left:0; width:100%; height:110px; text-align:center;}
 

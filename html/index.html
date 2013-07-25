@@ -248,18 +248,86 @@
     </div>
     <footer>
         <div class="content">
-            <nav>
+            <nav class="change">
                 <ul>
-                    <li><a href="#melding" class="btn fancybox">nieuw</a></li>
-                    <li><a href="#" class="btn">melding</a></li>
+                    <li><a href="#nieuw" class="btn fancybox">wijzig</a></li>
+                    <li><strong><span class="nummer">178</span><span>: </span></strong><span>Dhr. Jansen, 1234, 5678, 7845</span></li>
+                    <li><a href="#" class="btn delete">uitzetten</a></li>
+                </ul>
+            </nav>
+            <nav class="actions">
+                <ul>
+                    <li><a href="#nieuw" class="btn fancybox">nieuw</a></li>
+                    <li><a href="#melding" class="btn fancybox">melding</a></li>
                 </ul>
             </nav>
             <nav class="tabs">
                 <ul>
-                    <li><a href="#" class="btn">balie</a></li>
-                    <li><a href="#" class="btn">depot</a></li>
+                    <li><a href="#balie" class="btn">balie</a></li>
+                    <li><a href="#depot" class="btn">depot</a></li>
                 </ul>
             </nav>
+        </div>
+    </footer>
+</section>
+
+<section id="attendering" class="page">
+    <div class="content columns2">
+        <div class="row">
+            <div class="col">
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>178</span></div>
+                        <div class="message"><table><tr><td>Dhr. Jansen, 1234, 5478, 9854</td></tr></table></div>
+                        <span class="issue">1</span>
+                    </div>
+                </div>
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>013</span></div>
+                        <div class="message"></div>
+                        <span class="issue">2</span>
+                    </div>
+                </div>
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>200</span></div>
+                        <div class="message"><table><tr><td>Dhr. Jansen, 1234, 5478, 9854</td></tr></table></div>
+                        <span class="issue">3</span>
+                    </div>
+                </div>
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>046</span></div>
+                        <div class="message"></div>
+                        <span class="issue">1</span>
+                    </div>
+                </div>
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>075</span></div>
+                        <div class="message"><table><tr><td>Mw. Klein Obbink - Van der Meer, 1234, 5478, 9854</td></tr></table></div>
+                        <span class="issue">1</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="todo">
+                    <div class="inner">
+                        <div class="nr"><span>067</span></div>
+                        <div class="message"><table><tr><td>Dhr. Poelstra, 1234, 5478, 9854</td></tr></table></div>
+                        <span class="issue">1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="content">
+            <div class="total">
+                <span>Totaal</span>
+                <span class="nr">4</span>
+            </div>
         </div>
     </footer>
 </section>
@@ -488,28 +556,50 @@
         </div>
     </div>
     <footer>
-
+        <div class="content">
+            <nav class="tabs">
+                <ul>
+                    <li><a href="#balie" class="btn">balie</a></li>
+                    <li><a href="#depot" class="btn">depot</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
 </section>
 
 <!-- popups -->
-<div id="melding" class="popup">
+<section id="nieuw" class="popup">
     <div class="content">
         <div class="formfield row">
             <div class="col">
-                <div class="nr"><span></span></div>
+                <div class="nr"><span id="nieuw_tafelnummer_value"></span></div>
             </div>
             <div class="col">
-                <label for="melding_tafelnummer">tafelnummer</label>
-                <input type="text" id="melding_tafelnummer" name="nr" maxlength="3">
+                <label for="nieuw_tafelnummer">tafelnummer</label>
+                <input type="text" id="nieuw_tafelnummer" name="nr" maxlength="3" onKeyPress="meldingKeyPress()" onKeyUp="meldingKeyPress()">
             </div>
         </div>
         <div class="formfield row">
-            <label for="melding_opmerking">opmerking</label>
-            <textarea id="melding_opmerking"></textarea>
+            <label for="nieuw_opmerking">opmerking</label>
+            <textarea id="nieuw_opmerking"></textarea>
         </div>
     </div>
-</div>
+    <footer>
+        <a href="#" class="btn large submit">Bewaren</a>
+    </footer>
+</section>
+
+<section id="melding" class="popup">
+    <div class="content">
+        <div class="formfield row">
+            <label for="melding_text">melding</label>
+            <textarea id="melding_text" class="large"></textarea>
+        </div>
+    </div>
+    <footer>
+        <a href="#" class="btn large submit">Bewaren</a>
+    </footer>
+</section>
 
 </body>
 </html>
