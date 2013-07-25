@@ -1,14 +1,37 @@
 <!doctype html>
-<html ng-app="AttenderingApp">
+<html lang="nl" ng-app="AttenderingApp">
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta name="description" content="Nationaal archief - attenderingsysteem" />
+    <meta name="author" content="Ordina" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+    <!-- Title -->
+    <title>Nationaal archief - attenderingsysteem</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+
+    <!-- favicon
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      -->
+
+    <!-- Scripts -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+   	<script type="text/javascript" src="js/lib/jquery-1.8.1.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.flexslider-min.js"></script>
+
+    <!-- Add fancyBox main JS and CSS files -->
+    <script type="text/javascript" src="resources/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+    <link rel="stylesheet" type="text/css" href="resources/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
 	<script src="js/lib/angular-1.0.7/angular.min.js"></script>
 	<script src="js/lib/angular-1.0.7/angular-resource.js"></script>
+	<script src="js/lib/angular-flexslider.js"></script>
 	<script src="js/script.js"></script>
-	<style>
-		.ingeschakeld {color: red;}
-		.selected {font-weight: bold;}
-	</style>
 </head>
 <body>
 	<ng-view></ng-view>
