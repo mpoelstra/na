@@ -134,9 +134,11 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 .flexslider .flex-control-nav {height:10%; width:100%; text-align:center;}
 .flexslider .flex-viewport ul,
 .flexslider .flex-viewport ul li { height:100%; }
+.flexslider .flex-viewport ul li .slidewrapper { height:100%; }
 
 .flexslider > ul.slides { height:90%;} /* flexslide type fade */
 .flexslider > ul.slides li  { height:100%; }
+.flexslider > ul.slides li .slidewrapper  { height:100%; }
 
 .flexslider > .progress         { width:25%; height:10%; position:absolute; bottom:0; right:0; }
 .flexslider .progressbar        { width:100%; height:25px; border:5px solid #00A7E3; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
