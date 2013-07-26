@@ -1,12 +1,12 @@
-var myApp = angular.module('AttenderingApp',['ngResource']);
+var myApp = angular.module('AttenderingApp',['ngResource','angular-flexslider']);
 
 myApp.config(function($routeProvider){
 	$routeProvider.when('/studiezaal/', {
-		templateUrl: 'studiezaal.html',
+		templateUrl: 'tpl/studiezaal.tpl',
 		controller: 'StudiezaalCtrl'
 	})
 	.when('/studiezaal/edit', {
-		templateUrl: 'studiezaaledit.html',
+		templateUrl: 'tpl/studiezaaledit.tpl',
 		controller: 'StudiezaalEditCtrl'
 	})
 	.otherwise({
@@ -43,15 +43,16 @@ myApp.filter('formatpasnummer', function(){
 });
 
 
+
 myApp.directive('depotpas', function() {
 	return {
 		restrict: "E",
 		replace: true,
-		template: "<div class='nummer'>{{item.pasnummer | formatpasnummer}}</div>",
+		template: "<a class='nr href='#'><span>{{item.pasnummer | formatpasnummer}}</span></a>",
 		link: function(scope, element, attrs){
 
 			if (scope.item.ingeschakeld == "1") {
-				element.addClass('ingeschakeld');
+				element.addClass('enabled');
 			}
 
 			element.bind('click', function(e) {
@@ -68,12 +69,6 @@ myApp.directive('refreshtimer', function($timeout) {
 		restrict: "A",
 		link: function(scope, element, attrs) {
 
-			//function timerfunc() {
-			//	scope.$apply(attrs.refreshfunction);
-			//	$timeout(timerfunc, parseInt(attrs.refreshtimer));
-			//}
-
-			//$timeout(timerfunc, parseInt(attrs.refreshtimer));
 			setInterval(function() {
 				scope.$apply(attrs.refreshfunction);
 			}, parseInt(attrs.refreshtimer));
@@ -100,7 +95,7 @@ myApp.controller('StudiezaalEditCtrl', function($scope, Studiezaal){
 			};
 
 			for (var i = 0; i < pasnummers.length;i++) {
-				if (i % rowsize == 0) {
+				if ((i % rowsize == 0) && (i > 0)) {
 					if (currentrow) {
 						passen.rows.push(currentrow);
 						currentrow = [];
@@ -194,7 +189,9 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 
 
 				if (newpage) {
-					allitems.pages.push(currentpage);
+					allitems.pages.push({pagetype: 'passen',
+										 pagecontent: currentpage
+										});
 					currentpage = {rows:[]};
 				}
 
@@ -203,16 +200,51 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 
 			if ((i==pasnummers.length - 1) && (currentrow.items.length > 0)){
 				currentpage.rows.push(currentrow);
-				allitems.pages.push(currentpage);
+				allitems.pages.push({pagetype: 'passen',
+									 pagecontent: currentpage
+									});
 			}
 
 		}
 
+		allitems.pages.push({
+			pagetype: 'melding',
+			pagecontent: "Dit is een melding"
+		})
+
 		$scope.passen = allitems;
+		//$scope.melding ="Vandaag is de studiezaal open tot 16:00";
 
 
 	});
 	}
+
+	$scope.flexsliderBefore = function(slider) {
+
+	}
+
+	$scope.flexsliderStart = function(slider) {
+		                //alert(slider.count);
+                slider.find('.meter').animate({
+                    width: '100%'
+                }, 9000, 'linear', function() {
+                    // Animation complete.
+                    //slider.find('.meter').css('width','0%');
+                });
+	}
+
+	$scope.flexsliderAfter = function(slider) {
+		   //alert(slider.count);
+           slider.find('.meter').css('width','0%');
+           slider.find('.meter').animate({
+                    width: '100%'
+                }, 9000, 'linear', function() {
+                    // Animation complete.
+                    // slider.find('.meter').css('width','0%');
+                });
+	}
+
+
 
 	$scope.getPassen();
 
