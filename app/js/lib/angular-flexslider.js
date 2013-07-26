@@ -60,13 +60,19 @@
                 continue;
               }
               if (attrKey === 'start' || attrKey === 'before' || attrKey === 'after' || attrKey === 'end' || attrKey === 'added' || attrKey === 'removed') {
-                $attr[attrKey] = (function(evalExp) {
-                  return function() {
-                    return $scope.$apply(function() {
-                      return $scope.$eval(evalExp);
-                    });
-                  };
-                })(attrVal);
+                if (typeof(attrVal) != 'function') {
+                  $attr[attrKey] = (function(evalExp, sliderpar) {
+                    return function() {
+                      return $scope.$apply(function(self) {
+
+                        var slider = $(flexsliderDiv).data('flexslider');
+                        return $scope.$eval(function() {
+                          self[evalExp](slider);
+                        });
+                      });
+                    };
+                  })(attrVal, flexsliderDiv);
+                }
                 continue;
               }
             }

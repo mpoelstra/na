@@ -143,7 +143,7 @@ $app->put('/studiezaal/pasnummer/:id', function($id) use ($app) {
 
 $app->get('/depot/pasnummer', function() use ($app) {
 
-	$pasnummers = R::find('depot');
+	$pasnummers = R::findAll('depot', 'ORDER BY modificationtime');
 	$app->response()->header('Content-Type', 'application/json');
 
 	echo json_encode(R::exportAll($pasnummers));
@@ -164,8 +164,18 @@ $app->map('/depot/pasnummer/:id', function($id) use ($app) {
 	
 	$pasnummer->pasnummer = (int) $id;
 	$pasnummer->mededeling = (string) $input->mededeling;
+	$pasnummer->modificationtime = R::isoDateTime();
 	R::store($pasnummer);
 })->via('PUT', 'POST');
+
+
+$app->delete('/depot/pasnummer/:id', function($id) use ($app) {
+	  $pasnummer = R::findOne('depot', 'pasnummer=?', array($id));
+
+	  if ($pasnummer) {
+	  	R::trash($pasnummer);
+	  }
+});
 
 
 // Initialiseer de depot pasnummers (alles leeg, geen pasnummers op het depot bord)

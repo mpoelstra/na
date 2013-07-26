@@ -1,4 +1,4 @@
-var myApp = angular.module('AttenderingApp',['ngResource','angular-flexslider']);
+myApp = angular.module('AttenderingApp',['ngResource','angular-flexslider']);
 
 myApp.config(function($routeProvider){
 	$routeProvider.when('/studiezaal/', {
@@ -9,50 +9,66 @@ myApp.config(function($routeProvider){
 		templateUrl: 'tpl/studiezaaledit.tpl',
 		controller: 'StudiezaalEditCtrl'
 	})
+	.when('/depot/',{
+		templateUrl: 'tpl/depot.tpl',
+		controller: 'DepotCtrl'
+	})
 	.otherwise({
 		template: 'bestaat niet'
 	});
 })
 
 myApp.factory('Studiezaal', function($resource){
-	return $resource('../api/studiezaal/pasnummer/:nummer', {nummer: '@pasnummer'}, {
+	return  {
+
+		passen: $resource('../api/studiezaal/pasnummer/:nummer', {nummer: '@pasnummer'}, {
 						save: {
 							method: 'PUT'
 						}
-    			});
+    			}),
+		mededeling: $resource('../api/studiezaal/mededeling')
+	}
 });
 
 
 
 myApp.factory('Depot', function($resource){
-	return [1,2,3];
+	return $resource('../api/depot/pasnummer/:nummer', {nummer: '@pasnummer'});
 });
 
 
 myApp.filter('formatpasnummer', function(){
 	return function(number) {
-		var leadingzeros = '';
-		for (var i = 0; i < (3 - number.length); i++) {
-			leadingzeros += '0';
-		}
+		var formattednumber = '';
+		if (number) {
+			var leadingzeros = '';
+			for (var i = 0; i < (3 - number.length); i++) {
+				leadingzeros += '0';
+			}
 
-		var formattednumber = '' + leadingzeros + number;
+			formattednumber = '' + leadingzeros + number;
+		}
 		return formattednumber;
 	};
 
 });
 
 
-
 myApp.directive('depotpas', function() {
 	return {
 		restrict: "E",
 		replace: true,
-		template: "<a class='nr href='#'><span>{{item.pasnummer | formatpasnummer}}</span></a>",
+		template: '<a class="nr" href="#" blockdefault><span>{{item.pasnummer | formatpasnummer}}</span></a>',
 		link: function(scope, element, attrs){
 
 			if (scope.item.ingeschakeld == "1") {
 				element.addClass('enabled');
+			}
+
+			var setSelectedClass = scope.$eval(attrs.setselectedclass);
+
+			if (setSelectedClass) {
+				element.addClass('selected');
 			}
 
 			element.bind('click', function(e) {
@@ -78,18 +94,30 @@ myApp.directive('refreshtimer', function($timeout) {
 
 });
 
+myApp.directive('blockdefault', function() {
+    return { 
+    	restrict: "A",
+    	link: function(scope, element, attrs) {
+        	$(element).click(function(event) {
+           		 event.preventDefault();
+        	});
+    	}
+	}
+});
+
+
 
 myApp.controller('StudiezaalEditCtrl', function($scope, Studiezaal){
 
 
 	$scope.getPassen = function() {
 		var rowsize = 20;
-		$scope.currentpas = null;
+		$scope.currentpas = $scope.currentpas || null;
 		$scope.editstate = '';
 
 		var currentrow = [];
 		//Studiezaal.pasnummers().query(function(pasnummers){
-		Studiezaal.query(function(pasnummers){		
+		Studiezaal.passen.query(function(pasnummers){		
 			var passen = {
 				rows: []
 			};
@@ -150,6 +178,42 @@ myApp.controller('StudiezaalEditCtrl', function($scope, Studiezaal){
 
 });
 
+myApp.controller('DepotCtrl', function($scope, Depot){
+
+	var maxpascount = 10;
+	var numberofcols = 2;
+	var colsize = Math.floor(maxpascount / numberofcols);
+
+	$scope.getPassen = function() {
+
+		var currentcol = [];
+		Depot.query(function(pasnummers){
+			var passen = {cols:[]};
+			var pascount = (pasnummers.length < maxpascount ? pasnummers.length : maxpascount);
+
+			for (var i = 0; i < pascount;i++) {
+				if ((i % colsize == 0) && (i > 0)) {
+					if (currentcol) {
+						passen.cols.push(currentcol);
+						currentcol = [];
+					}
+				}
+				pasnummers[i].volgnummer = i + 1;
+				currentcol.push(pasnummers[i]);
+			}
+
+			if (currentcol.length > 0) {
+				passen.cols.push(currentcol);
+			}	
+
+
+			$scope.passen = passen;
+			$scope.pascount = pasnummers.length;
+		})
+	}
+
+	$scope.getPassen();
+});
 
 
 myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
@@ -160,7 +224,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	var pagesize = 32;
 	var rowsize = 8;
 
-	Studiezaal.query(function(pasnummers){
+	Studiezaal.passen.query(function(pasnummers){
 
 
 		var pasindex = 0;
@@ -207,12 +271,16 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 
 		}
 
-		allitems.pages.push({
-			pagetype: 'melding',
-			pagecontent: "Dit is een melding"
-		})
+		Studiezaal.mededeling.query(function(mededeling) {
+			if ((mededeling.length) && (mededeling.length > 0)) {
+				allitems.pages.push({
+					pagetype: 'melding',
+					pagecontent: mededeling[0].mededeling
+				});
+			}
 
-		$scope.passen = allitems;
+			$scope.passen = allitems;
+		})
 		//$scope.melding ="Vandaag is de studiezaal open tot 16:00";
 
 
@@ -235,10 +303,19 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 
 	$scope.flexsliderAfter = function(slider) {
 		   //alert(slider.count);
+
+		   if (slider.currentSlide == (slider.count - 1)) {
+		   	slider.pause();
+		   }
+
            slider.find('.meter').css('width','0%');
            slider.find('.meter').animate({
                     width: '100%'
                 }, 9000, 'linear', function() {
+                	if (slider.currentSlide == (slider.count - 1)) {
+                		slider.pause();
+                		$scope.getPassen();
+                	}
                     // Animation complete.
                     // slider.find('.meter').css('width','0%');
                 });
