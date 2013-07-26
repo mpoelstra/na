@@ -77,7 +77,6 @@ section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 a
 
 section.page > footer .content { width:96%; height:100%; position:relative; margin:0 auto;}
 section.page > footer nav { height:60px; position:absolute; top:50%; margin-top:-30px; }
-section.page > footer nav.change { display:none; }
 section.page > footer nav.tabs { right:0;}
 section.page > footer nav ul li { float:left; margin-right:20px; }
 section.page > footer nav.tabs ul li { margin-right:0; margin-left:20px; }
