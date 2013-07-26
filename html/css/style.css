@@ -11,6 +11,7 @@ fontsizes
 
 1em = 16px
 2em = 32px
+2.5em = 40px
 3em = 48px
 4em = 64px
 _____________________________________________________
@@ -38,26 +39,26 @@ em 				{ font-style:italic;}
 _____________________________________________________*/
 
 html,
-body        { width:100%; height:100%;}
+body        { width:100%; height:100%; background:#5E5047;}
 body,
 input,
 textarea    { font-size:16px; font-family: 'FedraSansAltStd-Medium', arial, sans-serif; }
 body.comic  { font-family:"Comic Sans MS"; }
-h1          { color:#FFF; font-size:3em; }
+h1          { color:#FFF; font-size:2.5em; }
 a           { text-decoration:none; outline:none; }
 strong         { color:#FFF; font-weight:normal; }
 
 /* buttons */
-a.btn       { display:inline-block; height:60px; line-height:60px; text-align:center; width:150px; color:#FFF; background:#00A7E3; }
+a.btn       { display:inline-block; height:60px; line-height:60px; text-align:center; width:150px; color:#FFF; background:#01A7E3; }
 a.btn:hover { -webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 
     box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5); }
 a.btn.large { width:300px; height:80px; line-height:80px; font-size:2em; }
 
 /* pasnummers */
-.nr                 { display:block; color:#FFF; background:#00A7E3; position:relative; box-sizing:border-box; -moz-box-sizing:border-box;  }
-a.nr:hover           { background:#FF6200; }
-.nr.selected        { background:#FF6200; border:5px solid black;}
+.nr                 { display:block; color:#FFF; background:#01A7E3; position:relative; box-sizing:border-box; -moz-box-sizing:border-box;  }
+a.nr:hover           { background:#FF6600; }
+.nr.selected        { background:#FF6600; border:5px solid black;}
 .nr.enabled         { background:#CCC; color:#000;}
 .nr span            { display:block; font-size:4em; width:100%; position:absolute; top:50%; margin-top:-32px; text-align:center; }
 .columns20 .nr span { font-size:2em; margin-top:-16px;}
@@ -70,9 +71,10 @@ section.page            { position:absolute; width:100%; height:100%; top:0; lef
                             -o-transition: opacity 1s;
                             transition: opacity 1s; }
 section.page.visible        { opacity:1; visibility:visible; }
-section.page > header       { width:100%; background:#FF6200; height:10%; position:relative; overflow:hidden; }
-section.page > footer       { width:100%; background:#FF6200; height:10%; position:absolute; bottom:0; overflow:hidden; }
-section.page > header h1    { width:100%; position:absolute; top:50%; margin-top:-24px; text-align:center; }
+section.page > header       { width:100%; height:10%; position:relative; overflow:hidden; background:#726660; background:url('../img/bgheader.png') bottom left repeat-x;  }
+section.page > header div.logo { position:absolute; background:url('../img/logo.png') bottom left no-repeat; left:0; bottom:0; width:192px; height:96px;}
+section.page > footer       { width:100%; background:#FF6600; height:10%; position:absolute; bottom:0; overflow:hidden; }
+section.page > header h1    { width:96%; left:2%; position:absolute; bottom:36px; text-align:right; }
 section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 auto; }
 
 section.page > footer .content { width:96%; height:100%; position:relative; margin:0 auto;}
@@ -88,7 +90,7 @@ section.page .row > .col { float:left; display:block; height:100%; width:11.1%; 
 section.page .row > .col:first-child { margin-left:0 }
 section.page .row > .col a.nr { position:absolute; top:16%; right:0; bottom:0; left:0;}
 section.page table.row { height:100%; border-collapse:collapse; }
-section.page table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; }
+section.page table.row tr td { width:90%; padding:0 5%; height:100%; text-align:center; vertical-align:middle; font-size:3em; line-height:56px; color:#FFF; }
 
 section.page .columns20 .row { height:10%;}
 section.page .columns20 .row > .col { width:4.335%; margin-left:0.7%; }
@@ -103,8 +105,8 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 /* attendering */
 #attendering > .content                             { height:86%; position:relative; top:2%; }
 #attendering .todo                                  { height:20%; width:100%; position:relative; }
-#attendering .todo .inner                           { position:absolute; top:4%; right:0; bottom:4%; left:0; background:#00A7E3; overflow:hidden; }
-#attendering .todo .inner div.nr                    { position:absolute; width:20%; height:100%; background:#FF6200; border:10px solid #00A7E3; box-sizing:border-box; -moz-box-sizing:border-box; }
+#attendering .todo .inner                           { position:absolute; top:4%; right:0; bottom:4%; left:0; background:#01A7E3; overflow:hidden; }
+#attendering .todo .inner div.nr                    { position:absolute; width:20%; height:100%; background:#FF6600; border:10px solid #01A7E3; box-sizing:border-box; -moz-box-sizing:border-box; }
 #attendering .todo .inner div.message               { width:80%; height:100%; position:absolute; left:20%;}
 #attendering .todo .inner div.message table         { height:100%; width:100%;}
 #attendering .todo .inner div.message table tr td   { width:94%; padding:0 3%; height:100%; text-align:left; vertical-align:middle; font-size:2em; line-height:36px; }
@@ -113,7 +115,7 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 #attendering footer .total                          { float:right; height:100%; }
 #attendering footer .total div                      { display:inline-block; height:100%; position:relative; }
 #attendering footer .total div span                 { display:block; font-size:4em; width:100%; position:relative; top:50%; margin-top:-40px; text-align:center; }
-#attendering footer .total .nr                      { width:170px; border: 10px solid #FF6200;
+#attendering footer .total .nr                      { width:170px; border: 10px solid #FF6600;
     box-sizing: border-box;
     -moz-box-sizing: border-box; }
 
@@ -140,18 +142,22 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 .flexslider > ul.slides li .slidewrapper  { height:100%; }
 
 .flexslider > .progress         { width:25%; height:10%; position:absolute; bottom:0; right:0; }
-.flexslider .progressbar        { width:100%; height:25px; border:5px solid #00A7E3; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
-.flexslider .progressbar .meter { height:100%; background:#00A7E3; }
+.flexslider .progressbar        { width:100%; height:25px; border:5px solid #FFF; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
+.flexslider .progressbar .meter { height:100%; background:#FFF; }
 
 .flex-control-nav li    { display:inline-block; margin:0 10px; width:40px; height:100%; position:relative; }
 .flex-control-nav li a  { display:block; cursor:pointer; position:absolute; top:50%; margin-top:-20px; color:#FFF; text-align:center;
                             width:40px; height:40px; line-height:40px;
                             box-sizing:border-box;
                             -moz-box-sizing:border-box;
-                            border:5px solid #00A7E3;
-                            background:#FFF;
-                            border-radius:50%; -webkit-border-radius:50%;}
-.flex-control-nav li a.flex-active { background:#00A7E3; color:#00A7E3; }
+                            border:5px solid #FFF;
+                            background:none;
+                            border-radius:50%; -webkit-border-radius:50%;
+                            overflow:hidden; font-size:0.1em; text-indent:-40px; }
+.flex-control-nav li a.flex-active { background:#FFF; color:#FFF; }
+/*
+5E5047
+*/
 
 /* popus */
 .popup                  { width:800px; height:600px; display:none; position:relative; }
