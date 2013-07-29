@@ -1,6 +1,6 @@
 <section id="attendering" class="page visible">
     <div class="content columns2">
-        <div class="row">
+        <div class="row" refreshtimer="30000" refreshfunction="getPassen()">
 
             <div class="col" ng-repeat="col in passen.cols">
                 <div class="todo" ng-repeat="item in col">

@@ -13,6 +13,10 @@ myApp.config(function($routeProvider){
 		templateUrl: 'tpl/depot.tpl',
 		controller: 'DepotCtrl'
 	})
+	.when('/depot/edit', {
+		templateUrl: 'tpl/depotedit.tpl',
+		controller: 'DepotEditCtrl'
+	})
 	.otherwise({
 		template: 'bestaat niet'
 	});
@@ -61,24 +65,39 @@ myApp.directive('depotpas', function() {
 		template: '<a class="nr" href="#" blockdefault><span>{{item.pasnummer | formatpasnummer}}</span></a>',
 		link: function(scope, element, attrs){
 
-			if (scope.item.ingeschakeld == "1") {
+			var setEnabledClass = scope.$eval(attrs.setenabledclass);
+
+			if (setEnabledClass) {
 				element.addClass('enabled');
+			} else {
+				element.removeClass('enabled');
 			}
 
 			var setSelectedClass = scope.$eval(attrs.setselectedclass);
 
 			if (setSelectedClass) {
 				element.addClass('selected');
+			} else {
+				element.removeClass('selected');
 			}
 
 			element.bind('click', function(e) {
 				angular.element(".selected").removeClass('selected');
-				element.addClass('selected');
+
 				scope.$apply(attrs.itemselected);
+
+				var setSelectedClass = scope.$eval(attrs.setselectedclass);
+
+				if (setSelectedClass) {
+					element.addClass('selected');
+				} 
+
 			});
+
 		}
 	}
 });
+
 
 myApp.directive('refreshtimer', function($timeout) {
 	return {
@@ -104,6 +123,35 @@ myApp.directive('blockdefault', function() {
     	}
 	}
 });
+
+myApp.directive('fancybox', function() {
+	return {
+		restrict: "A",
+		link: function(scope, element, attrs) {
+
+			$(element).click(function(event){
+				
+				if ((attrs.fancyboxinit) && (attrs.fancyboxinit.length > 0)) {
+					scope.$apply(attrs.fancyboxinit);
+				}
+
+				$.fancybox.open();
+				event.preventDefault();
+			});
+
+			$(element).fancybox();
+
+			$(attrs.href + ' .submit').click(function(event) {
+
+				scope.$apply(attrs.fancyboxok);
+				$.fancybox.close();
+				event.preventDefault();
+			})
+
+
+		}
+	}
+})
 
 
 
@@ -144,20 +192,11 @@ myApp.controller('StudiezaalEditCtrl', function($scope, Studiezaal){
 
 	$scope.selectPas = function(pas) {
 
-		//if ($scope.currentpas) {
-		//	$scope.currentpas.event.srcElement.style.cssText.replace('font-weight: bold','');
-		//	$scope.currentpas.event.srcElement.style.cssText += 'font-weight:normal';
-		//}
-
-		$scope.currentpas = pas;
-
-		/*
-		if (pas.ingeschakeld == '1') {
-			$scope.editstate = 'uitschakelen';
+		if ($scope.currentpas != pas) {
+			$scope.currentpas = pas;
 		} else {
-			$scope.editstate = 'inschakelen';
+			$scope.currentpas = null;
 		}
-		*/					
 
 	}
 
@@ -214,6 +253,139 @@ myApp.controller('DepotCtrl', function($scope, Depot){
 
 	$scope.getPassen();
 });
+
+
+myApp.controller('DepotEditCtrl', function($scope, Depot, Studiezaal, $filter){
+
+
+	$scope.getPassen = function() {
+		var pagesize = 32;
+		var rowsize = 8;
+
+		$scope.nieuwepas = {
+			pasnummer: null,
+			mededeling: null
+		}
+
+
+		Depot.query(function(pasnummersunfiltered){
+			var pasindex = 0;
+			var allitems = {pages: []};
+			var currentrow = {items: []};
+			var currentpage = {rows:[]};
+			var pageoffset = 0;
+
+			var pasnummers = $filter('orderBy')(pasnummersunfiltered, function(pas) {
+				return parseInt(pas.pasnummer);
+
+			});
+
+			for (var i = 0; i < pasnummers.length; i++) {
+				var newpage = (((pasindex % pagesize) == 0) && (pasindex > 0));
+
+				if (newpage) {
+					pageoffset = pasindex;
+				}
+
+				var newrow = ((newpage || ((pasindex - pageoffset) % rowsize == 0)) && (pasindex > 0));
+
+				if (newrow) {
+					currentpage.rows.push(currentrow);
+					currentrow = {items: []};
+				}
+
+				currentrow.items.push(pasnummers[i]);
+
+
+				if (newpage) {
+					allitems.pages.push({pagetype: 'passen',
+										 pagecontent: currentpage
+										});
+					currentpage = {rows:[]};
+				}
+
+				pasindex++;
+
+				if ((i==pasnummers.length - 1) && (currentrow.items.length > 0)){
+					currentpage.rows.push(currentrow);
+					allitems.pages.push({pagetype: 'passen',
+										 pagecontent: currentpage
+										});
+				}
+
+			}
+
+
+			Studiezaal.mededeling.query(function(mededeling) {
+
+				if ((mededeling.length) && (mededeling.length > 0)) {
+					$scope.mededeling = mededeling[0].mededeling;
+				} else {
+					$scope.mededeling = '';
+				}
+
+				$scope.passen = allitems;
+			})
+
+
+		});
+	}
+
+	$scope.selectPas = function(pas) {
+		if ($scope.currentpas != pas) {
+			$scope.currentpas = pas;
+		} else {
+			$scope.currentpas = null;
+		}
+	}
+
+	$scope.deletePas = function() {
+		if ($scope.currentpas) {
+			var pas = $scope.currentpas;
+
+			pas.$delete(function() {
+				$scope.currentpas = null;
+				$scope.getPassen();
+			});
+		}
+
+	}
+
+	$scope.savePasChange = function() {
+		var pas = new Depot($scope.nieuwepas);
+		pas.$save(function() {
+			$scope.currentpas = null;
+			$scope.nieuwepas = null;
+			$scope.getPassen();
+		})
+
+	}
+
+	$scope.nieuwePas = function() {
+		$scope.nieuwepas = {
+			pasnummer: null,
+			mededeling: null
+		}
+	}
+
+	$scope.wijzigPas = function() {
+		$scope.nieuwepas = {
+			pasnummer: $scope.currentpas.pasnummer,
+			mededeling: $scope.currentpas.mededeling
+		}
+	}
+
+	$scope.saveMelding = function() {
+		var melding = new Studiezaal.mededeling({mededeling: $scope.mededeling});
+		melding.$save();
+	}
+
+	$scope.getPassen();
+});
+
+
+
+
 
 
 myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){

@@ -7,7 +7,15 @@ myApp.directive('depotpas', function() {
 		template: '<a class="nr" href="#" blockdefault><span>{{item.pasnummer | formatpasnummer}}</span></a>',
 		link: function(scope, element, attrs){
 
+/*
 			if (scope.item.ingeschakeld == "1") {
+				element.addClass('enabled');
+			}
+
+*/
+
+			var setEnabledClass = scope.$eval(attrs.setenabledclass);
+			if (setEnabledClass) {
 				element.addClass('enabled');
 			}
 
