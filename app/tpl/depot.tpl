@@ -1,4 +1,4 @@
-<section id="attendering" class="page visible">
+<section id="attendering" class="page visible noheader">
     <div class="content columns2">
         <div class="row" refreshtimer="30000" refreshfunction="getPassen()">
 
@@ -16,7 +16,7 @@
     <footer>
         <div class="content">
             <div class="total">
-                <div><span>totaal</span></div>
+                <div class="label"><span>totaal</span></div>
                 <div class="nr"><span>{{pascount}}</span></div>
             </div>
         </div>

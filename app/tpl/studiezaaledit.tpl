@@ -4,7 +4,7 @@
             <div class="col" ng-repeat="item in row"><depotpas setenabledclass="item.ingeschakeld == '1'" setselectedclass="currentpas.pasnummer == item.pasnummer" itemselected="selectPas(item)"></depotpas></div>
         </div>
     </div>
-    <footer>
+    <footer class="nobg">
         <div class="content">
             <nav class="change" ng-show="currentpas != null">
                 <ul>
@@ -20,8 +20,8 @@
             </nav>
             <nav class="tabs">
                 <ul>
-                    <li><a href="#/depot/edit" class="btn">balie</a></li>
-                    <li><a href="#/studiezaal/edit" class="btn">depot</a></li>
+                    <li><a href="#/depot/edit" class="btn small">balie</a></li>
+                    <li><a href="#/studiezaal/edit" class="btn small active">depot</a></li>
                 </ul>
             </nav>
         </div>       	

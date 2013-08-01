@@ -490,6 +490,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 			if (($scope.passen) && ($scope.passen.pages) && ($scope.passen.pages.length > 0)) {
 				$scope.currentSlideType = $scope.passen.pages[slider.currentSlide].pagetype
 			}
+            slider.addClass('loaded');
 		}
 
 		if (slider) {
