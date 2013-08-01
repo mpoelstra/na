@@ -171,6 +171,7 @@
           }, speed, 'linear', function() {
               // Animation complete.
               //slider.find('.meter').css('width','0%');
+              vars.progressend(slider);
           });
         }
       },
@@ -895,7 +896,9 @@
     after: function(){},            //Callback: function(slider) - Fires after each slider animation completes
     end: function(){},              //Callback: function(slider) - Fires when the slider reaches the last slide (asynchronous)
     added: function(){},            //{NEW} Callback: function(slider) - Fires after a slide is added
-    removed: function(){}           //{NEW} Callback: function(slider) - Fires after a slide is removed
+    removed: function(){},           //{NEW} Callback: function(slider) - Fires after a slide is removed
+    // Callback progress
+    progressend: function() {}
   }
 
 
