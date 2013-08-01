@@ -136,10 +136,10 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 
 #attendering footer .total                          { float:right; height:110px; margin:14px 14px 0 0; overflow:hidden; }
 #attendering footer .total div                      { display:block; float:left; position:relative; height:110px; }
-#attendering footer .total div span                 { font-size:6.250em; color:#FFF;   }
+#attendering footer .total div span                 { font-size:6.250em; color:#FFF; display:block; width:100%; height:100%; line-height:110px;}
 #attendering footer .total div.nr                   { width:170px; height:110px; background:#FF6600; margin-left:14px; }
-#attendering footer .total div.nr span              { margin-top:-65px; }
-#attendering footer .total div.label span           { line-height:120px; }
+#attendering footer .total div.nr span              { position:static; margin-top:0; line-height:76px;}
+#attendering footer .total div.label span           {  }
 
 /* depot - studiezaal/edit */
 #depot > .content                                   { bottom:156px; }
