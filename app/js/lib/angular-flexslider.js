@@ -59,10 +59,10 @@
                 $attr[attrKey] = attrVal === 'true';
                 continue;
               }
-              if (attrKey === 'start' || attrKey === 'before' || attrKey === 'after' || attrKey === 'end' || attrKey === 'added' || attrKey === 'removed') {
-                  
+              if (attrKey === 'start' || attrKey === 'before' || attrKey === 'after' || attrKey === 'end' || attrKey === 'added' || attrKey === 'removed' || attrKey === 'progressend') {
+                /*  
                 if (typeof(attrVal) != 'function') {
-                  /*
+                  
                     $attr[attrKey] = (function(evalExp, sliderpar) {
                     
                     return function() {
@@ -76,33 +76,17 @@
                     };
                   })(attrVal, flexsliderDiv);
 
-*/
-
-                $attr[attrKey] = (function(evalExp, sliderpar) {
-                    
-                    return function() {
-                      var me = self;
-                      return setTimeout(function() {
-                        $scope.$apply(function(self) {
-
-                        var slider = $(sliderpar).data('flexslider');
-                        
-                        return $scope.$eval(function() {
-                          self[evalExp](slider);
-                        });
-
-                      });
-                      }, 0);
-
-                    };
-
-                  })(attrVal, flexsliderDiv);
-
-
-
 
 
                 }
+                */
+                $attr[attrKey] = (function(evalExp) {
+                  return function() {
+                    return setTimeout((function(){$scope.$apply(function() {
+                      return $scope.$eval(evalExp);
+                    });}));
+                  };
+                })(attrVal);
                 continue;
               }
             }
