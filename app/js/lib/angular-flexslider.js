@@ -60,8 +60,10 @@
                 continue;
               }
               if (attrKey === 'start' || attrKey === 'before' || attrKey === 'after' || attrKey === 'end' || attrKey === 'added' || attrKey === 'removed') {
+                  
                 if (typeof(attrVal) != 'function') {
                   $attr[attrKey] = (function(evalExp, sliderpar) {
+                    
                     return function() {
                       return $scope.$apply(function(self) {
 
