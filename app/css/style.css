@@ -11,9 +11,12 @@ fontsizes
 
 1em = 16px
 2em = 32px
+2.250em = 36px
 2.5em = 40px
+2.625em = 42px
 3em = 48px
 4em = 64px
+5.625em = 90px
 _____________________________________________________
 
 1. RESET
@@ -22,7 +25,7 @@ _____________________________________________________*/
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
 /*unreset */
 strong 			{ font-weight:bold; }
-em 				{ font-style:italic;}
+em 				{ font-style:italic; }
 
 @font-face {
     font-family: 'FedraSansAltStd-Medium';
@@ -31,36 +34,40 @@ em 				{ font-style:italic;}
     font-style: normal;
 }
 
-
-
 /*_____________________________________________________
 
 2. GLOBALS
 _____________________________________________________*/
 
 html,
-body        { width:100%; height:100%; background:#5E5047;}
+body        { width:100%; height:100%; background:#5E5046;}
 body,
 input,
 textarea    { font-size:16px; font-family: 'FedraSansAltStd-Medium', arial, sans-serif; }
 body.comic  { font-family:"Comic Sans MS"; }
-h1          { color:#FFF; font-size:2.5em; }
+body { background:url('../img/bgletters.gif') 50% bottom no-repeat;}
+h1          { color:#FFF; font-size:2.625em; font-weight:normal; }
 a           { text-decoration:none; outline:none; }
 strong         { color:#FFF; font-weight:normal; }
 
 /* buttons */
-a.btn       { display:inline-block; height:60px; line-height:60px; text-align:center; width:150px; color:#FFF; background:#01A7E3; }
-a.btn:hover { -webkit-box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+a.btn       { display:inline-block; font-size:2.250em; height:100px; line-height:100px; text-align:center; width:211px; color:#FFF; background:#FF6600;
+                -webkit-border-radius: 10px;
+                border-radius: 10px; }
+a.btn:hover { background:#FFF; color:#5D4F47; }
 
-    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.5); }
-a.btn.large { width:300px; height:80px; line-height:80px; font-size:2em; }
+a.btn.small { width:120px; height:64px; line-height:64px; }
+a.btn.small.active { background:none; }
+a.btn.small.active:hover { background:none; color:#FFF;}
+
+a.btn.large { width:536px; height:130px; line-height:130px; font-size:4.688em; }
 
 /* pasnummers */
 .nr                 { display:block; color:#FFF; background:#01A7E3; position:relative; box-sizing:border-box; -moz-box-sizing:border-box;  }
-a.nr:hover           { background:#FF6600; }
-.nr.selected        { background:#FF6600; border:5px solid black;}
+a.nr:hover          { background:none; border:10px solid #01A7E3; }
+.nr.selected        { background:none; border:10px solid #01A7E3; }
 .nr.enabled         { background:#CCC; color:#000;}
-.nr span            { display:block; font-size:4em; width:100%; position:absolute; top:50%; margin-top:-32px; text-align:center; }
+.nr span            { display:block; font-size:5.625em; width:100%; position:absolute; top:50%; margin-top:-45px; text-align:center; }
 .columns20 .nr span { font-size:2em; margin-top:-16px;}
 
 /* pages */
@@ -71,18 +78,24 @@ section.page            { position:absolute; width:100%; height:100%; top:0; lef
                             -o-transition: opacity 1s;
                             transition: opacity 1s; }
 section.page.visible        { opacity:1; visibility:visible; }
-section.page > header       { width:100%; height:10%; position:relative; overflow:hidden; background:#726660; background:url('../img/bgheader.png') bottom left repeat-x;  }
-section.page > header div.logo { position:absolute; background:url('../img/logo.png') bottom left no-repeat; left:0; bottom:0; width:192px; height:96px;}
-section.page > footer       { width:100%; background:#FF6600; height:10%; position:absolute; bottom:0; overflow:hidden; }
-section.page > header h1    { width:96%; left:2%; position:absolute; bottom:36px; text-align:right; }
-section.page > .content     { height:90%; width:96%; overflow:hidden; margin:0 auto; }
+section.page > header       { width:100%; height:125px; position:absolute; top:0; left:0; overflow:hidden; background:#7E736B url('../img/bgheader.png') bottom left repeat-x;  }
+section.page > header div.logo { position:absolute; background:url('../img/logo.png') bottom left no-repeat; left:28px; bottom:26px; width:201px; height:82px;}
+section.page > footer       { width:100%; height:138px; position:absolute; bottom:0; overflow:hidden; }
+section.page > header h1    { width:96%; left:2%; position:absolute; bottom:46px; text-align:right; white-space:nowrap; }
+section.page > .content     { position:absolute; left:2%; width:96%; top:125px; bottom:138px; overflow:hidden; }
+section.page.noheader > .content { top:0;}
+section.page.nofooter > .content { bottom:0;}
 
-section.page > footer .content { width:96%; height:100%; position:relative; margin:0 auto;}
-section.page > footer nav { height:60px; position:absolute; top:50%; margin-top:-30px; }
-section.page > footer nav.tabs { right:0;}
-section.page > footer nav ul li { float:left; margin-right:20px; }
-section.page > footer nav.tabs ul li { margin-right:0; margin-left:20px; }
-section.page > footer nav ul li span { display:inline-block; font-size:3em; height:60px; line-height:60px; }
+section.page > footer .content { width:100%; height:100%; position:relative; margin:0 auto;}
+section.page > footer nav { height:100%; float:left; }
+section.page > footer nav ul { overflow:hidden;}
+section.page > footer nav ul li { float:left; margin-right:20px; padding-top:16px; }
+section.page > footer nav ul li div.text { font-size:3.125em; height:100px; line-height:100px; background:#FFF; padding:0 50px; overflow:hidden; }
+section.page > footer nav.change,
+section.page > footer nav.actions { padding:0 2%; width:75%; background:url('../img/bgfooter.png'); }
+section.page > footer nav.tabs { width:21%; text-align:center;}
+section.page > footer nav.tabs ul li { margin:0 10px; float:none; display:inline-block; padding-top:37px; }
+
 
 /* grid */
 section.page .row { clear:both; overflow:hidden; width:100%; height:25%; }
@@ -155,26 +168,29 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
                             border-radius:50%; -webkit-border-radius:50%;
                             overflow:hidden; font-size:0.1em; text-indent:-40px; }
 .flex-control-nav li a.flex-active { background:#FFF; color:#FFF; }
+
+#balie .flexslider > .progress { display:none;}
 /*
 5E5047
 */
 
 /* popus */
-.popup                  { width:800px; height:600px; display:none; position:relative; }
+.popup                  { width:1100px; height:864px; display:none; position:relative; }
 .popup .content         { position:absolute; top:35px; right:35px; bottom:35px; left:35px; }
-.popup .nr              { width:142px; height:142px; }
+.popup .nr              { width:177px; height:177px; }
 .popup .col             { float:left; margin-left:35px; }
 .popup .col:first-child { margin-left:0; }
 .popup .row             { overflow:hidden; margin-bottom:35px; }
-.popup label            { display:block; font-size:2em; padding-bottom:19px;}
+.popup label            { display:block; font-size:3.750em; padding-bottom:5px; color:#FFF;}
 .popup input,
-.popup textarea         { border:3px solid black; outline:none; box-sizing:border-box; -moz-box-sizing:border-box; }
+.popup textarea         { border:4px solid black; outline:none; box-sizing:border-box; -moz-box-sizing:border-box; }
 .popup input:focus,
 .popup textarea:focus   { outline:none; border:3px solid black; }
-.popup input            { width:165px; height:91px; text-align:center; font-size:3em; }
-.popup textarea         { width:100%; height:180px; padding:10px; font-size:2em;}
-.popup textarea.large   { height:360px;}
-.popup footer           { position:absolute; bottom:0; left:0; width:100%; height:110px; text-align:center;}
+.popup input            { width:219px; height:113px; text-align:center; font-size:4.750em; }
+.popup textarea         { width:100%; height:225px; padding:10px; font-size:3em;}
+.popup textarea.large   { height:458px;}
+.popup footer           { position:absolute; bottom:0; left:0; right:0; height:250px; text-align:center; background:#7D726C;}
+.popup footer a.btn     { position:absolute; bottom:38px; left:50%; margin-left:-268px;}
 
 /* fancybox override */
 
@@ -182,3 +198,5 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
     overflow: hidden !important;
     overflow-y: hidden !important;
 }
+
+.fancybox-skin { padding:0 !important;}

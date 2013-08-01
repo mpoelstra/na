@@ -1,6 +1,6 @@
-<section id="balie" class="page visible">
+<section id="balie" class="page visible noheader">
     <div class="content">
-        <flex-slider slide="page in passen.pages" animation="slide" animation-speed="1000" slideshow-speed="10000" direction-nav="false" keyboard="false" slideshow="true" class="slides">
+        <flex-slider slide="page in passen.pages" animation="slide" animation-speed="1000" slideshow-speed="10000" direction-nav="false" keyboard="false" slideshow="false" class="slides">
             <li>
                 <div class="slidewrapper">
                     <div  class="row" ng-repeat="row in page.pagecontent.rows">
@@ -15,7 +15,7 @@
             <nav class="change" ng-show="currentpas != null">
                 <ul>
                     <li><a href="#nieuw" class="btn fancybox" fancyboxinit="wijzigPas()" fancyboxok="savePasChange()" fancybox>wijzig</a></li>
-                    <li><strong><span class="nummer">{{currentpas.pasnummer | formatpasnummer}}</span><span>: </span></strong><span>{{currentpas.mededeling}}</span></li>
+                    <li><div class="text"><span class="nummer">{{currentpas.pasnummer | formatpasnummer}}</span>{{currentpas.mededeling}}</div></li>
                     <li><a href="#" class="btn delete" ng-click="deletePas()" blockdefault>uitzetten</a></li>
                 </ul>
             </nav>
@@ -27,8 +27,8 @@
             </nav>
             <nav class="tabs">
                 <ul>
-                    <li><a href="#/depot/edit" class="btn">balie</a></li>
-                    <li><a href="#/studiezaal/edit" class="btn">depot</a></li>
+                    <li><a href="#/depot/edit" class="btn small active">balie</a></li>
+                    <li><a href="#/studiezaal/edit" class="btn small">depot</a></li>
                 </ul>
             </nav>
         </div>

@@ -1,4 +1,4 @@
-<section id="studiezaal" class="page visible">
+<section id="studiezaal" class="page visible nofooter">
     <header>
     	<div class="logo"></div>
         <h1>Onderstaande tafelnummers kunnen nieuwe stukken bij de balie halen</h1>

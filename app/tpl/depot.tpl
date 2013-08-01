@@ -1,4 +1,4 @@
-<section id="attendering" class="page visible">
+<section id="attendering" class="page visible noheader">
     <div class="content columns2">
         <div class="row" refreshtimer="30000" refreshfunction="getPassen()">
 
