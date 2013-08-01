@@ -455,14 +455,13 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 			}
 
 			$scope.passen = allitems;
-/*
-			if (allitems.pages.length == 0) {
-				$timeout(function(){
-					debugger;
+
+			if (allitems.pages.length <= 1) {
+				setTimeout(function(){
 					$scope.getPassen();
 				}, 10000);
 			}
-*/
+
 
 		})
 		//$scope.melding ="Vandaag is de studiezaal open tot 16:00";
