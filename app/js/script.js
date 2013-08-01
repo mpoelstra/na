@@ -471,7 +471,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	}
 
 	$scope.flexsliderBefore = function(slider) {
-		if (slider.count > 0) {
+		if ((slider) && (slider.count) && (slider.count > 0)) {
 			if (($scope.passen) && ($scope.passen.pages) && ($scope.passen.pages.length > 0)) {
 				if (slider.currentSlide == ($scope.passen.pages.length - 1)) {
 					$scope.currentSlideType = $scope.passen.pages[0].pagetype;
@@ -506,10 +506,14 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	$scope.flexsliderAfter = function(slider) {
 		   //alert(slider.count);
 
+		if ((slider) && (slider.count) && (slider.count > 0)) {
 		   if (slider.currentSlide == (slider.count - 1)) {
 		   	slider.pause();
 		   }
+		   slider.addClass('loaded');
+		}
 
+		if (slider) {
            slider.find('.meter').css('width','0%');
            slider.find('.meter').animate({
                     width: '100%'
@@ -521,6 +525,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
                     // Animation complete.
                     // slider.find('.meter').css('width','0%');
                 });
+       }
 	}
 
 

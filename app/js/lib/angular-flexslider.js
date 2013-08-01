@@ -30,9 +30,9 @@
             //slides = $('<ul class="slides"></ul><div class="progress"><div class="progressbar"><div class="meter" style="width:0%"></div></div></div>');
             slides = $('<ul class="slides"></ul>');
             flexsliderDiv = $('<div class="flexslider"></div>');
-            var progress = $('<div class="progress"><div class="progressbar"><div class="meter" style="width:0%"></div></div></div>');
+            //var progress = $('<div class="progress"><div class="progressbar"><div class="meter" style="width:0%"></div></div></div>');
             flexsliderDiv.append(slides);
-            flexsliderDiv.append(progress);
+            //flexsliderDiv.append(progress);
             $element.append(flexsliderDiv);
             if (collection == null) {
               return;

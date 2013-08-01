@@ -82,6 +82,9 @@
         // CONTROLNAV:
         if (vars.controlNav) methods.controlNav.setup();
 
+        // ProgressNav
+        if (vars.progressNav) methods.progressNav.setup();
+
         // DIRECTIONNAV:
         if (vars.directionNav) methods.directionNav.setup();
 
@@ -147,6 +150,27 @@
               slider.direction = (slider.currentItem < target) ? "next" : "prev";
               slider.flexAnimate(target, vars.pauseOnAction, false, true, true);
             }
+          });
+        }
+      },
+      progressNav: {
+        setup:function() {
+            
+            slider.progressScaffold = $('<div class="progress"><div class="progressbar"><div class="meter" style="width:0%"></div></div></div>');
+            slider.append(slider.progressScaffold);
+            this.update();
+
+
+
+        },
+        update:function() {
+          var speed = vars.slideshowSpeed - vars.animationSpeed;
+          slider.find('.meter').css('width','0%');
+          slider.find('.meter').animate({
+              width: '100%'
+          }, speed, 'linear', function() {
+              // Animation complete.
+              //slider.find('.meter').css('width','0%');
           });
         }
       },
@@ -464,6 +488,10 @@
 
         // CONTROLNAV
         if (vars.controlNav) methods.controlNav.active();
+
+        // ProgressNav
+        if (vars.progressNav) methods.progressNav.update();
+
 
         // !CAROUSEL:
         // CANDIDATE: slide active class (for add/remove slide)
@@ -835,6 +863,7 @@
 
     // Primary Controls
     controlNav: true,               //Boolean: Create navigation for paging control of each clide? Note: Leave true for manualControls usage
+    progressNav: false,
     directionNav: true,             //Boolean: Create navigation for previous/next navigation? (true/false)
     prevText: "Previous",           //String: Set the text for the "previous" directionNav item
     nextText: "Next",               //String: Set the text for the "next" directionNav item
