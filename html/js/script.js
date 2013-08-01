@@ -96,7 +96,7 @@ $(document).ready(function() {
             keyboard: false,
             slideshow: true,
             start: function(slider) {
-                //alert(slider.count);
+                l(slider);
                 slider.find('.meter').animate({
                     width: '100%'
                 }, 9000, 'linear', function() {
@@ -109,7 +109,6 @@ $(document).ready(function() {
                 //slider.find('.meter').css('width','0%');
             },
             after: function(slider) {
-                //alert(slider.count);
                 slider.find('.meter').css('width','0%');
                 slider.find('.meter').animate({
                     width: '100%'

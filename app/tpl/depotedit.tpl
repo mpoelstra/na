@@ -10,13 +10,13 @@
             </li>
         </flexslider>
     </div>
-    <footer>
+    <footer class="nobg">
         <div class="content">
             <nav class="change" ng-show="currentpas != null">
                 <ul>
-                    <li><a href="#nieuw" class="btn fancybox" fancyboxinit="wijzigPas()" fancyboxok="savePasChange()" fancybox>wijzig</a></li>
-                    <li><div class="text"><span class="nummer">{{currentpas.pasnummer | formatpasnummer}}</span>{{currentpas.mededeling}}</div></li>
-                    <li><a href="#" class="btn delete" ng-click="deletePas()" blockdefault>uitzetten</a></li>
+                    <li class="col1"><a href="#nieuw" class="btn fancybox" fancyboxinit="wijzigPas()" fancyboxok="savePasChange()" fancybox>wijzig</a></li>
+                    <li class="col2"><div class="text"><span class="nummer">{{currentpas.pasnummer | formatpasnummer}}</span>: {{currentpas.mededeling}}</div></li>
+                    <li class="col1"><a href="#" class="btn delete" ng-click="deletePas()" blockdefault>uitzetten</a></li>
                 </ul>
             </nav>
             <nav class="actions" ng-show="currentpas == null">

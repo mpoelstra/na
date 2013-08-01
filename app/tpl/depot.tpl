@@ -16,7 +16,7 @@
     <footer>
         <div class="content">
             <div class="total">
-                <div><span>totaal</span></div>
+                <div class="label"><span>totaal</span></div>
                 <div class="nr"><span>{{pascount}}</span></div>
             </div>
         </div>

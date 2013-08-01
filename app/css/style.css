@@ -80,7 +80,8 @@ section.page            { position:absolute; width:100%; height:100%; top:0; lef
 section.page.visible        { opacity:1; visibility:visible; }
 section.page > header       { width:100%; height:125px; position:absolute; top:0; left:0; overflow:hidden; background:#7E736B url('../img/bgheader.png') bottom left repeat-x;  }
 section.page > header div.logo { position:absolute; background:url('../img/logo.png') bottom left no-repeat; left:28px; bottom:26px; width:201px; height:82px;}
-section.page > footer       { width:100%; height:138px; position:absolute; bottom:0; overflow:hidden; }
+section.page > footer       { width:100%; height:138px; position:absolute; bottom:0; overflow:hidden; background:url('../img/bgfooter.png'); }
+section.page > footer.nobg  { background:none; }
 section.page > header h1    { width:96%; left:2%; position:absolute; bottom:46px; text-align:right; white-space:nowrap; }
 section.page > .content     { position:absolute; left:2%; width:96%; top:125px; bottom:138px; overflow:hidden; }
 section.page.noheader > .content { top:0;}
@@ -90,11 +91,16 @@ section.page > footer .content { width:100%; height:100%; position:relative; mar
 section.page > footer nav { height:100%; float:left; }
 section.page > footer nav ul { overflow:hidden;}
 section.page > footer nav ul li { float:left; margin-right:20px; padding-top:16px; }
-section.page > footer nav ul li div.text { font-size:3.125em; height:100px; line-height:100px; background:#FFF; padding:0 50px; overflow:hidden; }
+section.page > footer nav ul li div.text { font-size:3.125em; height:100px; line-height:100px; background:#FFF; padding:0 20px; overflow:hidden; }
 section.page > footer nav.change,
 section.page > footer nav.actions { padding:0 2%; width:75%; background:url('../img/bgfooter.png'); }
-section.page > footer nav.tabs { width:21%; text-align:center;}
+section.page > footer nav.tabs { width:21%; text-align:center; float:right;}
 section.page > footer nav.tabs ul li { margin:0 10px; float:none; display:inline-block; padding-top:37px; }
+
+section.page > footer nav.change ul li.col1 { width:15%; margin-left:2%; margin-right:0;}
+section.page > footer nav.change ul li.col2 { width:66%; margin-left:2%; margin-right:0; }
+section.page > footer nav.change ul li:first-child { margin-left:0;}
+section.page > footer nav.change ul li.col1 a.btn { width:100%;}
 
 
 /* grid */
@@ -109,32 +115,44 @@ section.page .columns20 .row { height:10%;}
 section.page .columns20 .row > .col { width:4.335%; margin-left:0.7%; }
 section.page .columns20 .row > .col:first-child { margin-left:0;}
 
-section.page .columns2 .row { height:100%;}
-section.page .columns2 .row .col { width:49%; margin-left:2%; }
+section.page .columns2 .row { height:100%; position:relative; }
+section.page .columns2 .row .col { position:relative; width:49%; margin-left:1%; height:98%; top:1%; } /* margin-left should be 2% but 1% looks nicer */
 section.page .columns2 .row .col:first-child { margin-left:0;}
 
 /* page specific */
 
-/* attendering */
-#attendering > .content                             { height:86%; position:relative; top:2%; }
+/* balie - depot/edit */
+#balie .flexslider > .progress,
+#balie .flexslider.loaded > .progress   { display:none; }
+
+
+/* attendering - depot */
+#attendering > .content                             {  }
 #attendering .todo                                  { height:20%; width:100%; position:relative; }
-#attendering .todo .inner                           { position:absolute; top:4%; right:0; bottom:4%; left:0; background:#01A7E3; overflow:hidden; }
-#attendering .todo .inner div.nr                    { position:absolute; width:20%; height:100%; background:#FF6600; border:10px solid #01A7E3; box-sizing:border-box; -moz-box-sizing:border-box; }
+#attendering .todo .inner                           { position:absolute; top:4%; right:0; bottom:4%; left:0; background:#FFF; overflow:hidden; }
+#attendering .todo .inner div.nr                    { position:absolute; width:20%; height:100%; background:#01A7E3; border:10px solid #FFF; box-sizing:border-box; -moz-box-sizing:border-box; }
+#attendering .todo .inner div.nr span               { font-size:4.500em; margin-top:-44px; }
 #attendering .todo .inner div.message               { width:80%; height:100%; position:absolute; left:20%;}
 #attendering .todo .inner div.message table         { height:100%; width:100%;}
 #attendering .todo .inner div.message table tr td   { width:94%; padding:0 3%; height:100%; text-align:left; vertical-align:middle; font-size:2em; line-height:36px; }
-#attendering .todo .inner span.issue                { display:block; font-size:2em; background:white; color:#000; width:50px; height:50px; line-height:50px; text-align:center; position:absolute; top:0; right:0;}
+#attendering .todo .inner span.issue                { display:block; font-size:2.250em; background:#5E5046; color:#FFF; width:50px; height:50px; line-height:47px; text-align:center; position:absolute; top:0; right:0;}
 
-#attendering footer .total                          { float:right; height:100%; }
-#attendering footer .total div                      { display:inline-block; height:100%; position:relative; }
-#attendering footer .total div span                 { display:block; font-size:4em; width:100%; position:relative; top:50%; margin-top:-40px; text-align:center; }
-#attendering footer .total .nr                      { width:170px; border: 10px solid #FF6600;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box; }
+#attendering footer .total                          { float:right; height:110px; margin:14px 14px 0 0; overflow:hidden; }
+#attendering footer .total div                      { display:block; float:left; position:relative; height:110px; }
+#attendering footer .total div span                 { font-size:6.250em; color:#FFF;   }
+#attendering footer .total div.nr                   { width:170px; height:110px; background:#FF6600; margin-left:14px; }
+#attendering footer .total div.nr span              { margin-top:-65px; }
+#attendering footer .total div.label span           { line-height:120px; }
 
-/* depot */
-#depot > .content                                   { height:88%; }
-#depot footer .change { width:60%;}
+/* depot - studiezaal/edit */
+#depot > .content                                   { bottom:156px; }
+
+#depot .nr                  { color:#5D4F47; background:#FFF; }
+#depot a.nr:hover           { background:none; border:4px solid #FFF; color:#FFF; }
+#depot a.nr.selected,
+#depot a.nr.selected:hover  { background:none; border:4px solid #01A7E3; color:#FFF; }
+#depot a.nr.enabled          { background:#01A7E3; color:#FFF;}
+
 #depot footer .change ul,
 #depot footer .change ul li,
 #depot footer .change a.btn { width:100%; }
@@ -155,7 +173,8 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 .flexslider > ul.slides li .slidewrapper  { height:100%; }
 
 .flexslider > .progress         { width:25%; height:10%; position:absolute; bottom:0; right:0; }
-.flexslider .progressbar        { width:100%; height:25px; border:5px solid #FFF; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
+.flexslider .progressbar        { visibility:hidden; width:100%; height:25px; border:5px solid #FFF; position:absolute; top:50%; margin-top:-13px; box-sizing:border-box; -moz-box-sizing:border-box; }
+.flexslider.loaded .progressbar { visibility:visible; }
 .flexslider .progressbar .meter { height:100%; background:#FFF; }
 
 .flex-control-nav li    { display:inline-block; margin:0 10px; width:40px; height:100%; position:relative; }
@@ -169,7 +188,7 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
                             overflow:hidden; font-size:0.1em; text-indent:-40px; }
 .flex-control-nav li a.flex-active { background:#FFF; color:#FFF; }
 
-#balie .flexslider > .progress { display:none;}
+
 /*
 5E5047
 */
