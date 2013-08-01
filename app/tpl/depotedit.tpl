@@ -22,7 +22,7 @@
             <nav class="actions" ng-show="currentpas == null">
                 <ul>
                     <li><a href="#nieuw" class="btn fancybox" fancyboxinit="nieuwePas()" fancyboxok="savePasChange()" fancybox>nieuw</a></li>
-                    <li><a href="#melding" class="btn fancybox" fancybox fancyboxok="saveMelding()">melding</a></li>
+                    <li><a href="#melding" class="btn fancybox" fancyboxok="saveMelding()" fancybox>melding</a></li>
                 </ul>
             </nav>
             <nav class="tabs">
@@ -44,7 +44,7 @@
             <div class="col">
                 <label for="nieuw_tafelnummer">tafelnummer</label>
                 <input type="text" id="nieuw_tafelnummer" name="nr" ng-maxlength="3" ng-pattern="/[0-9]+/" ng-model="nieuwepas.pasnummer" value=
-                "" ng-show="currentpas == null">
+                "">
             </div>
         </div>
         <div class="formfield row">

@@ -150,6 +150,45 @@ $app->get('/depot/pasnummer', function() use ($app) {
 
 });
 
+
+
+$app->map('/depot/pasnummer/:id', function($id) use ($app) {
+
+    $request = $app->request();
+    $body = $request->getBody();
+    $input = json_decode($body); 
+
+
+    if ($input->id != 0) {
+    	   $pasnummer = R::findOne('depot', 'id=?', array($input->id));
+
+    	   if (!$pasnummer) {
+    	   		$pasnummer = R::dispense('depot');
+    	   		$pasnummer->modificationtime = R::isoDateTime();
+    	   }
+    } else {
+    	    $pasnummer = R::dispense('depot');
+    	    $pasnummer->modificationtime = R::isoDateTime();
+    }
+
+
+    $deletepasnummer = R::findOne('depot', 'pasnummer=?', array($input->pasnummer));
+
+    if ($deletepasnummer) {
+    	if ($deletepasnummer->id != $input->id) {
+	    	R::trash($deletepasnummer);
+	    }
+    }
+
+	$pasnummer->pasnummer = (int) $input->pasnummer;
+	$pasnummer->mededeling = (string) $input->mededeling;
+	R::store($pasnummer);
+})->via('PUT', 'POST');
+
+
+
+
+/*
 $app->map('/depot/pasnummer/:id', function($id) use ($app) {
 
     $request = $app->request();
@@ -167,7 +206,7 @@ $app->map('/depot/pasnummer/:id', function($id) use ($app) {
 	$pasnummer->modificationtime = R::isoDateTime();
 	R::store($pasnummer);
 })->via('PUT', 'POST');
-
+*/
 
 $app->delete('/depot/pasnummer/:id', function($id) use ($app) {
 	  $pasnummer = R::findOne('depot', 'pasnummer=?', array($id));
