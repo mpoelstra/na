@@ -455,6 +455,14 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 			}
 
 			$scope.passen = allitems;
+/*
+			if (allitems.pages.length == 0) {
+				$timeout(function(){
+					debugger;
+					$scope.getPassen();
+				}, 10000);
+			}
+*/
 
 		})
 		//$scope.melding ="Vandaag is de studiezaal open tot 16:00";
@@ -466,7 +474,11 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	$scope.flexsliderBefore = function(slider) {
 		if (slider.count > 0) {
 			if (($scope.passen) && ($scope.passen.pages) && ($scope.passen.pages.length > 0)) {
-				$scope.currentSlideType = $scope.passen.pages[slider.currentSlide+1].pagetype
+				if (slider.currentSlide == ($scope.passen.pages.length - 1)) {
+					$scope.currentSlideType = $scope.passen.pages[0].pagetype;
+				} else {
+					$scope.currentSlideType = $scope.passen.pages[slider.currentSlide+1].pagetype;
+				}
 			}
 		}
 
@@ -475,18 +487,20 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	$scope.flexsliderStart = function(slider) {
 		                //alert(slider.count);
 
-		if (slider.count > 0) {
+		if ((slider) && (slider.count) && (slider.count > 0)) {
 			if (($scope.passen) && ($scope.passen.pages) && ($scope.passen.pages.length > 0)) {
 				$scope.currentSlideType = $scope.passen.pages[slider.currentSlide].pagetype
 			}
 		}
 
-        slider.find('.meter').animate({
-            width: '100%'
-        }, 9000, 'linear', function() {
-            // Animation complete.
-            //slider.find('.meter').css('width','0%');
-        });
+		if (slider) {
+	        slider.find('.meter').animate({
+	            width: '100%'
+	        }, 9000, 'linear', function() {
+	            // Animation complete.
+	            //slider.find('.meter').css('width','0%');
+	        });
+    	}
 	}
 
 	$scope.flexsliderAfter = function(slider) {

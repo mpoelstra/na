@@ -62,7 +62,8 @@
               if (attrKey === 'start' || attrKey === 'before' || attrKey === 'after' || attrKey === 'end' || attrKey === 'added' || attrKey === 'removed') {
                   
                 if (typeof(attrVal) != 'function') {
-                  $attr[attrKey] = (function(evalExp, sliderpar) {
+                  /*
+                    $attr[attrKey] = (function(evalExp, sliderpar) {
                     
                     return function() {
                       return $scope.$apply(function(self) {
@@ -74,6 +75,33 @@
                       });
                     };
                   })(attrVal, flexsliderDiv);
+
+*/
+
+                $attr[attrKey] = (function(evalExp, sliderpar) {
+                    
+                    return function() {
+                      var me = self;
+                      return setTimeout(function() {
+                        $scope.$apply(function(self) {
+
+                        var slider = $(sliderpar).data('flexslider');
+                        
+                        return $scope.$eval(function() {
+                          self[evalExp](slider);
+                        });
+
+                      });
+                      }, 0);
+
+                    };
+
+                  })(attrVal, flexsliderDiv);
+
+
+
+
+
                 }
                 continue;
               }
