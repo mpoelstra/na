@@ -43,8 +43,8 @@
             </div>
             <div class="col">
                 <label for="nieuw_tafelnummer">tafelnummer</label>
-                <input type="text" id="nieuw_tafelnummer" name="nr" ng-maxlength="3" ng-pattern="/[0-9]+/" ng-model="nieuwepas.pasnummer" value=
-                "">
+                <input type="text" id="nieuw_tafelnummer" name="nr" ng-minlength="1" ng-maxlength="3" ng-pattern="/^[0-9]+$/" ng-model="nieuwepas.pasnummer" value=
+                "" required>
             </div>
         </div>
         <div class="formfield row">
@@ -53,7 +53,7 @@
         </div>
     </div>
     <footer>
-        <a href="#" class="btn large submit">Bewaren</a>
+        <a href="#" class="btn large submit" ng-disable="!nr.$valid">Bewaren</a>
     </footer>
 </section>
 

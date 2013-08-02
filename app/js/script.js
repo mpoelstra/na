@@ -144,8 +144,10 @@ myApp.directive('fancybox', function() {
 			$(attrs.href + ' .submit').unbind('click');
 			$(attrs.href + ' .submit').click(function(event) {
 
-				scope.$apply(attrs.fancyboxok);
-				$.fancybox.close();
+				if (scope.$apply(attrs.fancyboxok)) {
+					$.fancybox.close();
+				}
+
 				event.preventDefault();
 			})
 
@@ -353,12 +355,18 @@ myApp.controller('DepotEditCtrl', function($scope, Depot, Studiezaal, $filter){
 	}
 
 	$scope.savePasChange = function() {
-		var pas = new Depot($scope.nieuwepas);
-		pas.$save(function() {
-			$scope.currentpas = null;
-			$scope.nieuwepas = null;
-			$scope.getPassen();
-		})
+		if ((($scope.nieuwepas.pasnummer > 0) && ($scope.nieuwepas.pasnummer <= 200)) && 
+			($scope.nieuwepas.mededeling ? $scope.nieuwepas.mededeling.length <= 50 : true)){
+			var pas = new Depot($scope.nieuwepas);
+			pas.$save(function() {
+				$scope.currentpas = null;
+				$scope.nieuwepas = null;
+				$scope.getPassen();
+			})
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
