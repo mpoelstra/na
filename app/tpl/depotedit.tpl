@@ -53,7 +53,7 @@
         </div>
     </div>
     <footer>
-        <a href="#" class="btn large submit" ng-disable="!nr.$valid">Bewaren</a>
+        <a href="#" class="btn large submit" ng-disable="!nr.$valid" >Bewaren</a>
     </footer>
 </section>
 
@@ -65,7 +65,7 @@
         </div>
     </div>
     <footer>
-        <a href="#" class="btn large submit">Bewaren</a>
+        <a href="#" class="btn large submit" easteregg="mededeling=='I secretly like Comic Sans'">Bewaren</a>
     </footer>
 </section>
 

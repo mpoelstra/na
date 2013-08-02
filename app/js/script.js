@@ -98,6 +98,21 @@ myApp.directive('depotpas', function() {
 	}
 });
 
+myApp.directive('easteregg', function() {
+	return {
+		restrict: "A",
+		link: function(scope, element, attrs) {
+			element.bind('click', function(){
+				var eastereggOn = scope.$eval(attrs.easteregg);
+
+				if (eastereggOn) {
+					$('body').addClass('comic');
+				}
+			});
+		}
+	}
+})
+
 
 myApp.directive('refreshtimer', function($timeout) {
 	return {
@@ -387,8 +402,13 @@ myApp.controller('DepotEditCtrl', function($scope, Depot, Studiezaal, $filter){
 	}
 
 	$scope.saveMelding = function() {
-		var melding = new Studiezaal.mededeling({mededeling: $scope.mededeling});
-		melding.$save();
+		if (($scope.mededeling) && ($scope.mededeling.length <= 400)) { 
+			var melding = new Studiezaal.mededeling({mededeling: $scope.mededeling});
+			melding.$save();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	$scope.getPassen();
