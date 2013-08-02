@@ -244,7 +244,7 @@ myApp.controller('DepotCtrl', function($scope, Depot){
 	$scope.getPassen = function() {
 
 		var currentcol = [];
-		Depot.query(function(pasnummers){
+		Depot.query({}, function(pasnummers){
 			var passen = {cols:[]};
 			var pascount = (pasnummers.length < maxpascount ? pasnummers.length : maxpascount);
 
@@ -266,6 +266,10 @@ myApp.controller('DepotCtrl', function($scope, Depot){
 
 			$scope.passen = passen;
 			$scope.pascount = pasnummers.length;
+		}, function() {
+			setTimeout(function() {
+				$scope.getPassen();
+			}, 10000)
 		})
 	}
 
@@ -402,7 +406,7 @@ myApp.controller('DepotEditCtrl', function($scope, Depot, Studiezaal, $filter){
 	}
 
 	$scope.saveMelding = function() {
-		if (($scope.mededeling) && ($scope.mededeling.length <= 400)) { 
+		if ((!$scope.mededeling) || ($scope.mededeling.length <= 250)) { 
 			var melding = new Studiezaal.mededeling({mededeling: $scope.mededeling});
 			melding.$save();
 			return true;
@@ -427,7 +431,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 	var pagesize = 32;
 	var rowsize = 8;
 
-	Studiezaal.passen.query(function(pasnummers){
+	Studiezaal.passen.query({}, function(pasnummers){
 
 
 		var pasindex = 0;
@@ -474,7 +478,7 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 
 		}
 
-		Studiezaal.mededeling.query(function(mededeling) {
+		Studiezaal.mededeling.query({},function(mededeling) {
 			if ((mededeling.length) && (mededeling.length > 0) && (mededeling[0].mededeling.length > 0)) {
 				allitems.pages.push({
 					pagetype: 'melding',
@@ -491,11 +495,17 @@ myApp.controller('StudiezaalCtrl',function($scope, Studiezaal){
 			}
 
 
-		})
+		}, $scope.onLoadError)
 		//$scope.melding ="Vandaag is de studiezaal open tot 16:00";
 
 
-	});
+	}, $scope.onLoadError);
+	}
+
+	$scope.onLoadError = function() {
+		setTimeout(function(){
+			$scope.getPassen();
+		}, 10000);
 	}
 
 	$scope.flexsliderBefore = function() {
