@@ -144,11 +144,12 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 /* depot - studiezaal/edit */
 #depot > .content                                   { bottom:156px; }
 
-#depot .nr                  { color:#5D4F47; background:#FFF; }
-#depot a.nr:hover           { background:none; border:4px solid #FFF; color:#FFF; }
+#depot .nr                      { color:#5D4F47; background:#FFF; }
+#depot a.nr:hover               { background:none; border:4px solid #FFF; color:#FFF; }
 #depot a.nr.selected,
-#depot a.nr.selected:hover  { background:none; border:4px solid #01A7E3; color:#FFF; }
-#depot a.nr.enabled          { background:#01A7E3; color:#FFF;}
+#depot a.nr.selected:hover      { background:none; border:4px solid #01A7E3; color:#FFF; }
+#depot a.nr.enabled             { background:#01A7E3; color:#FFF;}
+#depot a.nr.enabled.selected    { background:none; border:4px solid #01A7E3; color:#FFF; }
 
 #depot footer .change ul,
 #depot footer .change ul li,
@@ -215,3 +216,35 @@ section.page .columns2 .row .col:first-child { margin-left:0;}
 }
 
 .fancybox-skin { padding:0 !important;}
+
+/* not full hd screens ----------- */
+@media only screen
+and (max-width : 1700px) {
+
+
+    body,
+    input,
+    textarea { font-size:12px; }
+
+    a.btn.large {
+        width: 402px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 4.688em;
+    }
+
+    section.page > header h1 { bottom:48px; }
+    .nr span { margin-top:-42px;}
+
+    .columns20 .nr span { margin-top:-12px; }
+
+    #attendering .todo .inner div.nr span { margin-top:-27px;}
+    #attendering .todo .inner div.message table tr td { line-height:30px; }
+
+    .popup                  { width:825px; height:648px; }
+    .popup textarea         { height:178px; }
+    .popup textarea.large   { height:375px; }
+    .popup footer           { height:150px;}
+    .popup footer a.btn     { margin-left:-201px; bottom:26px;}
+
+}
