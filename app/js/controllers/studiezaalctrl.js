@@ -1,4 +1,4 @@
-angular.module('AttenderingApp.controllers', []).controller('StudiezaalCtrl',function($scope, Studiezaal){
+angular.module('AttenderingApp.controllers', []).controller('StudiezaalCtrl',function($scope, Studiezaal, Settings){
 
 
 
@@ -62,11 +62,13 @@ angular.module('AttenderingApp.controllers', []).controller('StudiezaalCtrl',fun
 			}
 
 			$scope.passen = allitems;
+			$scope.zaaltekst = Settings.zaaltekst;
+			$scope.zaalpagetimeout = Settings.zaalpagetimeout;
 
 			if (allitems.pages.length <= 1) {
 				setTimeout(function(){
 					$scope.getPassen();
-				}, 10000);
+				}, Settings.retrytimeout);
 			}
 
 
@@ -80,7 +82,7 @@ angular.module('AttenderingApp.controllers', []).controller('StudiezaalCtrl',fun
 	$scope.onLoadError = function() {
 		setTimeout(function(){
 			$scope.getPassen();
-		}, 10000);
+		}, Settings.retrytimeout);
 	}
 
 	$scope.flexsliderBefore = function() {

@@ -1,4 +1,4 @@
-angular.module('AttenderingApp.controllers').controller('DepotCtrl', function($scope, Depot){
+angular.module('AttenderingApp.controllers').controller('DepotCtrl', function($scope, Depot, Settings){
 
 	var maxpascount = 10;
 	var numberofcols = 2;
@@ -28,11 +28,12 @@ angular.module('AttenderingApp.controllers').controller('DepotCtrl', function($s
 
 
 			$scope.passen = passen;
+			$scope.depotrefreshtimeout = Settings.depotrefreshtimeout;
 			$scope.pascount = pasnummers.length;
 		}, function() {
 			setTimeout(function() {
 				$scope.getPassen();
-			}, 10000)
+			}, Settings.retrytimeout)
 		})
 	}
 
