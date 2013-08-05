@@ -57,6 +57,7 @@ require 'Redbean/rb.php';
 
 \Slim\Slim::registerAutoloader();
 R::setup('mysql:host=localhost;dbname=attendering', 'root', '');
+R::freeze(true);
 
 $app = new \Slim\Slim();
 
